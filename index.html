@@ -7,7 +7,7 @@
     <style>
         body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background-color: #000; }
 
-        /* ڤیدیۆی باکگراوند */
+        /* ڕێکخستنی ڤیدیۆی باکگراوند */
         #bg-video {
             position: fixed;
             right: 0;
@@ -23,11 +23,11 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
         }
 
         .container { 
-            background: rgba(255, 255, 255, 0.05); 
+            background: rgba(255, 255, 255, 0.08); 
             backdrop-filter: blur(20px);
             padding: 50px; 
             border-radius: 40px; 
@@ -40,66 +40,53 @@
 
         .app-icon { width: 90px; margin-bottom: 20px; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); }
 
-        h1 { font-size: 24px; margin-bottom: 10px; font-weight: 600; }
-        p { font-size: 15px; color: #ccc; margin-bottom: 30px; }
+        h1 { font-size: 26px; margin-bottom: 10px; }
+        p { font-size: 16px; color: #ddd; margin-bottom: 30px; }
 
-        /* --- لێرەدا دوگمە نوێیەکە دەست پێ دەکات --- */
         .download-btn { 
-            position: relative;
             display: inline-block; 
             background: linear-gradient(45deg, #007bff, #00d2ff); 
             color: white; 
-            padding: 18px 45px; 
+            padding: 18px 50px; 
             text-decoration: none; 
             border-radius: 50px; 
             font-weight: bold; 
             font-size: 18px;
-            letter-spacing: 1px;
             transition: all 0.4s ease;
             box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
             border: none;
-            overflow: hidden;
         }
 
         .download-btn:hover { 
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.6);
-            background: linear-gradient(45deg, #00d2ff, #007bff);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.5);
         }
 
-        .download-btn:active {
-            transform: translateY(-2px);
-        }
-
-        .file-info { margin-top: 25px; font-size: 12px; color: rgba(255,255,255,0.4); }
+        .file-info { margin-top: 25px; font-size: 13px; color: rgba(255,255,255,0.5); }
     </style>
 </head>
 <body>
 
     <video autoplay muted loop playsinline id="bg-video">
+        <source src="https://v1.padel.com/api/v1/contents/1118/preview/1080p.mp4" type="video/mp4">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-falling-snow-on-a-black-background-34487-large.mp4" type="video/mp4">
     </video>
 
     <div class="main-content">
         <div class="container">
-            <img src="https://cdn-icons-png.flaticon.com/512/721/721671.png" class="app-icon" alt="App Icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/721/721671.png" class="app-icon">
             <h1>بەرنامەی زانیاری</h1>
             <p>بە ئاسانی و بە یەک کلیک بەرنامەکە دابگرە</p>
             
             <a href="https://drive.google.com/file/d/1vuZYw2VGxOOpAbFd3K-nPYr3KsyZmkvG/view?usp=sharing" class="download-btn">
-                داگرتن (Download)
+                Download Now
             </a>
 
             <div class="file-info">
-                قەبارەی فایل: 12.5 MB | وەشانی: 1.0
+                Size: 12.5 MB | Version: 1.0.0
             </div>
         </div>
     </div>
 
 </body>
 </html>
-
-
-
-
-
