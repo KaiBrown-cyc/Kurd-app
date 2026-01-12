@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ku">
+<head>
+    <meta charset="UTF-8">
+    <title>داگرتنی بەرنامەی زانیاری</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; text-align: center; padding: 50px; }
+        .container { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: inline-block; max-width: 500px; }
+        h1 { color: #333; }
+        p { color: #666; font-size: 18px; }
+        .download-btn { 
+            display: inline-block; 
+            background-color: #007bff; 
+            color: white; 
+            padding: 15px 30px; 
+            text-decoration: none; 
+            border-radius: 30px; 
+            font-weight: bold; 
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .download-btn:hover { background-color: #0056b3; transform: scale(1.05); }
+        .file-info { margin-top: 15px; font-size: 12px; color: #999; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>بەرنامەی زانیاری</h1>
+        <p>بۆ داگرتنی بەرنامەکە بۆ سیستەمی ویندۆز، کلیک لە دوگمەی خوارەوە بکە:</p>
+        
+        <a href="https://drive.google.com/file/d/1vuZYw2VGxOOpAbFd3K-nPYr3KsyZmkvG/view?usp=sharing" class="download-btn">
+            داگرتن (Download)
+        </a>
+
+        <div class="file-info">
+            جۆری فایل: RAR | قەبارە: 12.5 MB
+        </div>
+    </div>
+
+</body>
+</html>
