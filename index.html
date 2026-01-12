@@ -2,48 +2,78 @@
 <html dir="rtl" lang="ku">
 <head>
     <meta charset="UTF-8">
-    <title> HWID داگرتنی بەرنامەی </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داگرتنی بەرنامەی زانیاری</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; text-align: center; padding: 50px; }
-        .container { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: inline-block; max-width: 500px; }
-        h1 { color: #333; }
-        p { color: #666; font-size: 18px; }
-        .download-btn { 
-            display: inline-block; 
-            background-color: #007bff; 
-            color: white; 
-            padding: 15px 30px; 
-            text-decoration: none; 
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
+
+        /* ڕێکخستنی ڤیدیۆکە */
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        /* کارتە ناوەڕاستەکە */
+        .main-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.4); /* کەمێک تاریککردنی پشتەوە */
+        }
+
+        .container { 
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(10px); /* لێڵکردنی شووشەیی */
+            padding: 40px; 
             border-radius: 30px; 
+            text-align: center;
+            max-width: 350px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+            color: white;
+        }
+
+        .app-icon { width: 80px; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
+
+        .download-btn { 
+            display: block; 
+            background: #fff; 
+            color: #000; 
+            padding: 15px; 
+            text-decoration: none; 
+            border-radius: 15px; 
             font-weight: bold; 
-            margin-top: 20px;
+            margin-top: 25px;
             transition: 0.3s;
         }
-        .download-btn:hover { background-color: #0056b3; transform: scale(1.05); }
-        .file-info { margin-top: 15px; font-size: 12px; color: #999; }
+
+        .download-btn:hover { background: #ddd; transform: scale(1.05); }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1> Kurd app (HWID) </h1>
-        <p>Used to change the hardware ID for windows11 & windows10
-            ▌                                                 ▌
-         بەکار دێت بۆ گۆرینی ئادی هاردوێر  بۆ سیستەمی  ویندۆوس ١١ و ویندۆوس ١٠  دەبێت   
-        </p>
-        
-        <a href="https://drive.google.com/drive/folders/1oFq-7G3HoAVTd6Cbr2O0_xW3soCxeoiv?usp=sharing" class="download-btn">
-        داونڵۆد
-        </a>
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="snow.mp4" type="video/mp4">
+    </video>
 
-        <div class="file-info">
-            جۆری فایل: RAR | قەبارە: 12.5 MB
+    <div class="main-content">
+        <div class="container">
+            <img src="https://cdn-icons-png.flaticon.com/512/721/721671.png" class="app-icon">
+            <h1>بەرنامەی زانیاری</h1>
+            <p>بەخێرهاتیت بۆ وێبسایتی فەرمی داگرتنی بەرنامەکەمان</p>
+            
+            <a href="https://drive.google.com/file/d/1vuZYw2VGxOOpAbFd3K-nPYr3KsyZmkvG/view?usp=sharing" class="download-btn">
+                داگرتن (Download)
+            </a>
         </div>
     </div>
 
 </body>
 </html>
-
-
-
 
