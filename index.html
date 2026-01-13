@@ -8,18 +8,10 @@
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%;
             overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;
-            background-color: #050505;
+            background-color: #050505; /* باکگراوندێکی ڕەشی شیک */
         }
 
-        #bg-video {
-            position: fixed;
-            right: 0; bottom: 0;
-            min-width: 100%; min-height: 100%;
-            z-index: -1;
-            object-fit: cover;
-            filter: brightness(0.4);
-        }
-
+        /* دروستکردنی باکگراوندێکی تۆخ بۆ ئەوەی بەفرەکە جوان دەرکەوێت */
         #snow-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -50,51 +42,7 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             color: white;
         }
-        <div style="position: fixed; bottom: 20px; left: 20px; z-index: 100;">
-    <div id="player" style="display:none;"></div>
-    
-    <button onclick="toggleMusic()" id="musicBtn" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 10px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); width: 50px; height: 50px; font-size: 20px;">
-        🎵
-    </button>
-</div>
 
-<script>
-    // بارکردنی API یوتیوب
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    var player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-            height: '0',
-            width: '0',
-            videoId: 'Fj6cr3FO2JI', // ئایدی ڤیدیۆکەی تۆ
-            playerVars: {
-                'autoplay': 0,
-                'loop': 1,
-                'playlist': 'Fj6cr3FO2JI'
-            }
-        });
-    }
-
-    var isPlaying = false;
-    function toggleMusic() {
-        var btn = document.getElementById("musicBtn");
-        if (!isPlaying) {
-            player.playVideo();
-            btn.style.background = "rgba(0, 255, 0, 0.2)";
-            btn.innerHTML = "⏸️"; // گۆڕینی ئایکۆن بۆ ڕاوەستان
-            isPlaying = true;
-        } else {
-            player.pauseVideo();
-            btn.style.background = "rgba(255, 255, 255, 0.1)";
-            btn.innerHTML = "🎵"; // گۆڕینی ئایکۆن بۆ مۆسیقا
-            isPlaying = false;
-        }
-    }
-</script>
         .app-icon { 
             width: 90px; height: 90px; 
             margin-bottom: 20px; 
@@ -118,32 +66,16 @@
             border: none;
         }
 
-        .music-control {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 100;
+        .download-btn:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 198, 255, 0.5);
+            filter: brightness(1.1);
         }
 
-        #musicBtn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            padding: 15px;
-            border-radius: 50%;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-            font-size: 22px;
-            width: 55px; height: 55px;
-            display: flex; align-items: center; justify-content: center;
-        }
+        .file-info { margin-top: 25px; font-size: 12px; color: rgba(255,255,255,0.4); }
     </style>
 </head>
-<body onclick="startVideo()">
-
-    <video loop playsinline id="bg-video">
-        <source src="snow.mp4" type="video/mp4">
-    </video>
+<body>
 
     <canvas id="snow-canvas"></canvas>
 
@@ -151,67 +83,92 @@
         <div class="container">
             <img src="https://cdn-icons-png.flaticon.com/512/721/721671.png" class="app-icon" alt="Icon">
             <h1> Kurd.cyc </h1>
-            <p> کلیک لە هەر شوێنێک بکە بۆ کارکردنی دەنگەکە </p>
-            <a href="https://drive.google.com/drive/folders/1oFq-7G3HoAVTd6Cbr2O0_xW3soCxeoiv" class="download-btn">
+            <p> 👇🏻کلیکی خوارەوە بکە بۆ بینینی بەرنامەکان👇🏻 </p>
+            
+            <a href="https://drive.google.com/drive/folders/1oFq-7G3HoAVTd6Cbr2O0_xW3soCxeoiv?usp=drive_link" class="download-btn">
                 بینینی بەرنامەکان
             </a>
+
+            <div class="file-info">
+                      ⡴⠒⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠉⠳⡆⠀
+⣇⠰⠉⢙⡄⠀⠀⣴⠖⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣆⠁⠙⡆
+⠘⡇⢠⠞⠉⠙⣾⠃⢀⡼⠀⠀⠀⠀⠀⠀⠀⢀⣼⡀⠄⢷⣄⣀⠀⠀⠀⠀⠀⠀⠀⠰⠒⠲⡄⠀⣏⣆⣀⡍
+⠀⢠⡏⠀⡤⠒⠃⠀⡜⠀⠀⠀⠀⠀⢀⣴⠾⠛⡁⠀⠀⢀⣈⡉⠙⠳⣤⡀⠀⠀⠀⠘⣆⠀⣇⡼⢋⠀⠀⢱
+⠀⠘⣇⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⡴⢋⡣⠊⡩⠋⠀⠀⠀⠣⡉⠲⣄⠀⠙⢆⠀⠀⠀⣸⠀⢉⠀⢀⠿⠀⢸
+⠀⠀⠸⡄⠀⠈⢳⣄⡇⠀⠀⢀⡞⠀⠈⠀⢀⣴⣾⣿⣿⣿⣿⣦⡀⠀⠀⠀⠈⢧⠀⠀⢳⣰⠁⠀⠀⠀⣠⠃
+⠀⠀⠀⠘⢄⣀⣸⠃⠀⠀⠀⡸⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠈⣇⠀⠀⠙⢄⣀⠤⠚⠁⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⢘⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⢰⣿⣿⣿⡿⠛⠁⠀⠉⠛⢿⣿⣿⣿⣧⠀⠀⣼⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡀⣸⣿⣿⠟⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⡀⢀⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡇⠹⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⡿⠁⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣤⣞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢢⣀⣠⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠲⢤⣀⣀⠀⢀⣀⣀⠤⠒⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+
+
+                
         </div>
     </div>
 
-    <div class="music-control">
-        <button onclick="toggleMusic(event)" id="musicBtn">🔇</button>
-    </div>
-
     <script>
-        var video = document.getElementById("bg-video");
-        var btn = document.getElementById("musicBtn");
-        var hasStarted = false;
-
-        // کاتێک کلیک لە هەر شوێنێکی سایتەکە دەکەیت دەستپێدەکات
-        function startVideo() {
-            if (!hasStarted) {
-                video.muted = false;
-                video.play();
-                btn.innerHTML = "🔊";
-                hasStarted = true;
-            }
-        }
-
-        function toggleMusic(event) {
-            event.stopPropagation(); // ڕێگری دەکات لەوەی کلیکەکە بگاتە body
-            if (video.muted) {
-                video.muted = false;
-                video.play();
-                btn.innerHTML = "🔊";
-            } else {
-                video.muted = true;
-                btn.innerHTML = "🔇";
-            }
-        }
-
-        // کۆدی بەفر
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, snowflakes = [];
+
         function init() {
-            width = window.innerWidth; height = window.innerHeight;
-            canvas.width = width; canvas.height = height;
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
             snowflakes = [];
             for (let i = 0; i < 150; i++) {
-                snowflakes.push({ x: Math.random() * width, y: Math.random() * height, r: Math.random() * 3 + 1, d: Math.random() * 1 });
+                snowflakes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    r: Math.random() * 3 + 1,
+                    d: Math.random() * 1
+                });
             }
         }
+
         function draw() {
-            ctx.clearRect(0, 0, width, height); ctx.fillStyle = 'white'; ctx.beginPath();
-            for (let f of snowflakes) { ctx.moveTo(f.x, f.y); ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true); }
-            ctx.fill(); update();
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            for (let i = 0; i < snowflakes.length; i++) {
+                let f = snowflakes[i];
+                ctx.moveTo(f.x, f.y);
+                ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+            }
+            ctx.fill();
+            update();
         }
+
         function update() {
-            for (let f of snowflakes) { f.y += Math.pow(f.d, 2) + 1; if (f.y > height) f.y = -10; }
+            for (let i = 0; i < snowflakes.length; i++) {
+                let f = snowflakes[i];
+                f.y += Math.pow(f.d, 2) + 1;
+                f.x += Math.sin(f.y / 50);
+                if (f.y > height) {
+                    snowflakes[i] = { x: Math.random() * width, y: -10, r: f.r, d: f.d };
+                }
+            }
         }
+
         window.addEventListener('resize', init);
-        init(); setInterval(draw, 30);
+        init();
+        setInterval(draw, 30);
     </script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
 
