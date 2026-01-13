@@ -8,14 +8,15 @@
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%;
             overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;
-            background-color: #050505; 
+            background-color: #050505; /* باکگراوندێکی ڕەشی شیک */
         }
 
+        /* دروستکردنی باکگراوندێکی تۆخ بۆ ئەوەی بەفرەکە جوان دەرکەوێت */
         #snow-canvas {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 1; 
+            z-index: 0;
             pointer-events: none;
         }
 
@@ -25,14 +26,14 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            z-index: 10; 
+            z-index: 1;
         }
 
         .container { 
             background: rgba(255, 255, 255, 0.05); 
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            padding: 40px; 
+            padding: 50px; 
             border-radius: 40px; 
             text-align: center;
             max-width: 360px;
@@ -42,9 +43,14 @@
             color: white;
         }
 
-        .app-icon { width: 90px; height: 90px; margin-bottom: 20px; }
-        h1 { font-size: 26px; margin: 0 0 10px 0; }
-        p { font-size: 15px; color: #bbb; margin-bottom: 30px; }
+        .app-icon { 
+            width: 90px; height: 90px; 
+            margin-bottom: 20px; 
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+        }
+
+        h1 { font-size: 26px; margin: 0 0 10px 0; font-weight: bold; }
+        p { font-size: 15px; color: #bbb; line-height: 1.6; margin-bottom: 30px; }
 
         .download-btn { 
             display: inline-block; 
@@ -53,30 +59,55 @@
             padding: 16px 45px; 
             text-decoration: none; 
             border-radius: 50px; 
-            font-weight: bold;
-            transition: 0.3s;
+            font-weight: bold; 
+            font-size: 18px;
+            transition: 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 132, 255, 0.3);
+            border: none;
         }
 
-        .music-control {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 100;
+        .download-btn:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 198, 255, 0.5);
+            filter: brightness(1.1);
         }
 
-        #musicBtn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px;
-        }
+        .file-info { margin-top: 25px; font-size: 12px; color: rgba(255,255,255,0.4); }
     </style>
 </head>
+<body>
+
+    <canvas id="snow-canvas"></canvas>
+
+    <div class="main-content">
+        <div class="container">
+            <img src="https://cdn-icons-png.flaticon.com/512/721/721671.png" class="app-icon" alt="Icon">
+            <h1> Kurd.cyc </h1>
+            <p> 👇🏻کلیکی خوارەوە بکە بۆ بینینی بەرنامەکان👇🏻 </p>
+            
+            <a href="https://drive.google.com/drive/folders/1oFq-7G3HoAVTd6Cbr2O0_xW3soCxeoiv?usp=drive_link" class="download-btn">
+                بینینی بەرنامەکان
+            </a>
+
+            <div class="file-info">
+                      ⡴⠒⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠉⠳⡆⠀
+⣇⠰⠉⢙⡄⠀⠀⣴⠖⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣆⠁⠙⡆
+⠘⡇⢠⠞⠉⠙⣾⠃⢀⡼⠀⠀⠀⠀⠀⠀⠀⢀⣼⡀⠄⢷⣄⣀⠀⠀⠀⠀⠀⠀⠀⠰⠒⠲⡄⠀⣏⣆⣀⡍
+⠀⢠⡏⠀⡤⠒⠃⠀⡜⠀⠀⠀⠀⠀⢀⣴⠾⠛⡁⠀⠀⢀⣈⡉⠙⠳⣤⡀⠀⠀⠀⠘⣆⠀⣇⡼⢋⠀⠀⢱
+⠀⠘⣇⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⡴⢋⡣⠊⡩⠋⠀⠀⠀⠣⡉⠲⣄⠀⠙⢆⠀⠀⠀⣸⠀⢉⠀⢀⠿⠀⢸
+⠀⠀⠸⡄⠀⠈⢳⣄⡇⠀⠀⢀⡞⠀⠈⠀⢀⣴⣾⣿⣿⣿⣿⣦⡀⠀⠀⠀⠈⢧⠀⠀⢳⣰⠁⠀⠀⠀⣠⠃
+⠀⠀⠀⠘⢄⣀⣸⠃⠀⠀⠀⡸⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠈⣇⠀⠀⠙⢄⣀⠤⠚⠁⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⢘⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⢰⣿⣿⣿⡿⠛⠁⠀⠉⠛⢿⣿⣿⣿⣧⠀⠀⣼⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡀⣸⣿⣿⠟⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⡀⢀⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡇⠹⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⡿⠁⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣤⣞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢢⣀⣠⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠲⢤⣀⣀⠀⢀⣀⣀⠤⠒⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+
+
+        </head>
 <body onclick="startMusic()">
 
     <canvas id="snow-canvas"></canvas>
@@ -167,7 +198,15 @@
         }
         window.onresize = init; init(); setInterval(draw, 30);
     </script>
+
 </body>
 </html>
+
+
+
+
+
+
+
 
 
