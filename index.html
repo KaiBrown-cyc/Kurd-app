@@ -11,7 +11,6 @@
             background-color: #050505;
         }
 
-        /* چاککردنی ڤیدیۆی باکگراوند */
         #bg-video {
             position: fixed;
             right: 0; bottom: 0;
@@ -75,8 +74,6 @@
             border: none;
         }
 
-        .file-info { margin-top: 25px; font-size: 12px; color: rgba(255,255,255,0.4); }
-
         .music-control {
             position: fixed;
             bottom: 20px;
@@ -88,19 +85,20 @@
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.3);
             color: white;
-            padding: 12px;
+            padding: 15px;
             border-radius: 50%;
             cursor: pointer;
             backdrop-filter: blur(10px);
-            font-size: 20px;
+            font-size: 22px;
+            width: 55px; height: 55px;
+            display: flex; align-items: center; justify-content: center;
         }
     </style>
 </head>
-<body>
+<body onclick="startVideo()">
 
-    <video autoplay muted loop playsinline id="bg-video">
+    <video loop playsinline id="bg-video">
         <source src="snow.mp4" type="video/mp4">
-        <source src="r07qxo_-_RDownload (1).mov" type="video/quicktime">
     </video>
 
     <canvas id="snow-canvas"></canvas>
@@ -109,30 +107,37 @@
         <div class="container">
             <img src="https://cdn-icons-png.flaticon.com/512/721/721671.png" class="app-icon" alt="Icon">
             <h1> Kurd.cyc </h1>
-            <p> 👇🏻کلیکی خوارەوە بکە بۆ بینینی بەرنامەکان👇🏻 </p>
-            
-            <a href="https://drive.google.com/drive/folders/1oFq-7G3HoAVTd6Cbr2O0_xW3soCxeoiv?usp=drive_link" class="download-btn">
+            <p> کلیک لە هەر شوێنێک بکە بۆ کارکردنی دەنگەکە </p>
+            <a href="https://drive.google.com/drive/folders/1oFq-7G3HoAVTd6Cbr2O0_xW3soCxeoiv" class="download-btn">
                 بینینی بەرنامەکان
             </a>
-
-            <div class="file-info">
-                ⡴⠒⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠉⠳⡆⠀<br>
-                ⣇⠰⠉⢙⡄⠀⠀⣴⠖⢦⠀⠀⠀⠀⠀⠘⣆⠁⠙⡆
-            </div>
         </div>
     </div>
 
     <div class="music-control">
-        <button onclick="toggleMusic()" id="musicBtn">🔇</button>
+        <button onclick="toggleMusic(event)" id="musicBtn">🔇</button>
     </div>
 
     <script>
         var video = document.getElementById("bg-video");
         var btn = document.getElementById("musicBtn");
+        var hasStarted = false;
 
-        function toggleMusic() {
+        // کاتێک کلیک لە هەر شوێنێکی سایتەکە دەکەیت دەستپێدەکات
+        function startVideo() {
+            if (!hasStarted) {
+                video.muted = false;
+                video.play();
+                btn.innerHTML = "🔊";
+                hasStarted = true;
+            }
+        }
+
+        function toggleMusic(event) {
+            event.stopPropagation(); // ڕێگری دەکات لەوەی کلیکەکە بگاتە body
             if (video.muted) {
                 video.muted = false;
+                video.play();
                 btn.innerHTML = "🔊";
             } else {
                 video.muted = true;
@@ -144,40 +149,24 @@
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, snowflakes = [];
-
         function init() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
+            width = window.innerWidth; height = window.innerHeight;
+            canvas.width = width; canvas.height = height;
             snowflakes = [];
             for (let i = 0; i < 150; i++) {
                 snowflakes.push({ x: Math.random() * width, y: Math.random() * height, r: Math.random() * 3 + 1, d: Math.random() * 1 });
             }
         }
-
         function draw() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = 'white';
-            ctx.beginPath();
-            for (let f of snowflakes) {
-                ctx.moveTo(f.x, f.y);
-                ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
-            }
-            ctx.fill();
-            update();
+            ctx.clearRect(0, 0, width, height); ctx.fillStyle = 'white'; ctx.beginPath();
+            for (let f of snowflakes) { ctx.moveTo(f.x, f.y); ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true); }
+            ctx.fill(); update();
         }
-
         function update() {
-            for (let f of snowflakes) {
-                f.y += Math.pow(f.d, 2) + 1;
-                if (f.y > height) f.y = -10;
-            }
+            for (let f of snowflakes) { f.y += Math.pow(f.d, 2) + 1; if (f.y > height) f.y = -10; }
         }
-
         window.addEventListener('resize', init);
-        init();
-        setInterval(draw, 30);
+        init(); setInterval(draw, 30);
     </script>
 </body>
 </html>
