@@ -11,12 +11,11 @@
             background-color: #050505; 
         }
 
-        /* باکگراوندی بەفرەکە */
         #snow-canvas {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 0;
+            z-index: 1; /* بەفرەکە لە پشتەوە بێت */
             pointer-events: none;
         }
 
@@ -26,14 +25,14 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            z-index: 1;
+            z-index: 10; /* ناوەڕۆکەکە لە پێشەوە بێت */
         }
 
         .container { 
             background: rgba(255, 255, 255, 0.05); 
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            padding: 50px; 
+            padding: 40px; 
             border-radius: 40px; 
             text-align: center;
             max-width: 360px;
@@ -43,14 +42,9 @@
             color: white;
         }
 
-        .app-icon { 
-            width: 90px; height: 90px; 
-            margin-bottom: 20px; 
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
-        }
-
-        h1 { font-size: 26px; margin: 0 0 10px 0; font-weight: bold; }
-        p { font-size: 15px; color: #bbb; line-height: 1.6; margin-bottom: 30px; }
+        .app-icon { width: 90px; height: 90px; margin-bottom: 20px; }
+        h1 { font-size: 26px; margin: 0 0 10px 0; }
+        p { font-size: 15px; color: #bbb; margin-bottom: 30px; }
 
         .download-btn { 
             display: inline-block; 
@@ -59,20 +53,10 @@
             padding: 16px 45px; 
             text-decoration: none; 
             border-radius: 50px; 
-            font-weight: bold; 
-            font-size: 18px;
-            transition: 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0, 132, 255, 0.3);
-            border: none;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
-        .download-btn:hover { 
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 198, 255, 0.5);
-            filter: brightness(1.1);
-        }
-
-        /* ستایلی دوگمەی مۆسیقا */
         .music-control {
             position: fixed;
             bottom: 20px;
@@ -81,4 +65,102 @@
         }
 
         #musicBtn {
-            background:
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body onclick="startMusic()">
+
+    <canvas id="snow-canvas"></canvas>
+
+    <div class="main-content">
+        <div class="container">
+            <img src="https://cdn-icons-png.flaticon.com/512/721/721671.png" class="app-icon" alt="Icon">
+            <h1> Kurd.cyc </h1>
+            <p> کلیک لە هەر شوێنێک بکە بۆ کارکردنی مۆسیقا </p>
+            
+            <a href="https://drive.google.com/drive/folders/1oFq-7G3HoAVTd6Cbr2O0_xW3soCxeoiv" class="download-btn">
+                بینینی بەرنامەکان
+            </a>
+        </div>
+    </div>
+
+    <div class="music-control">
+        <div id="youtube-player"></div>
+        <button onclick="toggleMusic(event)" id="musicBtn">🎵</button>
+    </div>
+
+    <script>
+        // لێرە تەنها کاتێک مۆسیقاکە بار دەبێت ئەگەر ئینتەرنێت هەبێت و کێشە نەبێت
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        var isPlaying = false;
+        var videoId = 'xY1DvxQzI4o';
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0', width: '0', videoId: videoId,
+                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': videoId },
+                events: { 'onReady': onPlayerReady }
+            });
+        }
+
+        function onPlayerReady(event) { event.target.mute(); }
+
+        function startMusic() {
+            if (!isPlaying && player && player.playVideo) {
+                player.unMute();
+                player.playVideo();
+                updateBtn(true);
+                isPlaying = true;
+            }
+        }
+
+        function toggleMusic(e) {
+            e.stopPropagation();
+            if (isPlaying) { player.pauseVideo(); updateBtn(false); isPlaying = false; }
+            else { player.playVideo(); updateBtn(true); isPlaying = true; }
+        }
+
+        function updateBtn(p) {
+            var b = document.getElementById("musicBtn");
+            b.innerHTML = p ? "⏸️" : "🎵";
+            b.style.background = p ? "rgba(0, 255, 0, 0.2)" : "rgba(255, 255, 255, 0.1)";
+        }
+
+        // کۆدی بەفر
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+        let w, h, flakes = [];
+        function init() {
+            w = window.innerWidth; h = window.innerHeight;
+            canvas.width = w; canvas.height = h;
+            flakes = [];
+            for (let i = 0; i < 100; i++) {
+                flakes.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 3 + 1, d: Math.random() * 1 });
+            }
+        }
+        function draw() {
+            ctx.clearRect(0, 0, w, h); ctx.fillStyle = 'white'; ctx.beginPath();
+            for (let f of flakes) { ctx.moveTo(f.x, f.y); ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true); }
+            ctx.fill(); update();
+        }
+        function update() {
+            for (let f of flakes) { f.y += Math.pow(f.d, 2) + 1; if (f.y > h) f.y = -10; }
+        }
+        window.onresize = init; init(); setInterval(draw, 30);
+    </script>
+</body>
+</html>
