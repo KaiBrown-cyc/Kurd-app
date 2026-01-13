@@ -8,16 +8,17 @@
         body, html { 
             margin: 0; padding: 0; height: 100%; width: 100%;
             overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;
-            background-color: #050505; /* باکگراوندێکی ڕەشی شیک */
+            background-color: #000;
         }
 
-        /* دروستکردنی باکگراوندێکی تۆخ بۆ ئەوەی بەفرەکە جوان دەرکەوێت */
-        #snow-canvas {
+        /* ڕێکخستنی ڤیدیۆکە وەک باکگراوند */
+        #bg-video {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-            pointer-events: none;
+            right: 0; bottom: 0;
+            min-width: 100%; min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.5); /* تاریککردنی ڤیدیۆکە بۆ ئەوەی نووسینەکە جوان دەرکەوێت */
         }
 
         .main-content {
@@ -33,7 +34,7 @@
             background: rgba(255, 255, 255, 0.05); 
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            padding: 50px; 
+            padding: 40px; 
             border-radius: 40px; 
             text-align: center;
             max-width: 360px;
@@ -69,15 +70,36 @@
         .download-btn:hover { 
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 198, 255, 0.5);
-            filter: brightness(1.1);
         }
 
-        .file-info { margin-top: 25px; font-size: 12px; color: rgba(255,255,255,0.4); }
+        /* دوگمەی کۆنتڕۆڵی دەنگی ڤیدیۆکە */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+
+        #musicBtn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .ascii-art { font-size: 8px; line-height: 8px; margin-top: 20px; color: rgba(255,255,255,0.3); white-space: pre; }
     </style>
 </head>
 <body>
 
-    <canvas id="snow-canvas"></canvas>
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="bg.mp4" type="video/mp4">
+    </video>
 
     <div class="main-content">
         <div class="container">
@@ -89,8 +111,8 @@
                 بینینی بەرنامەکان
             </a>
 
-            <div class="file-info">
-                      ⡴⠒⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠉⠳⡆⠀
+            <div class="ascii-art">
+⡴⠒⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠉⠳⡆⠀
 ⣇⠰⠉⢙⡄⠀⠀⣴⠖⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣆⠁⠙⡆
 ⠘⡇⢠⠞⠉⠙⣾⠃⢀⡼⠀⠀⠀⠀⠀⠀⠀⢀⣼⡀⠄⢷⣄⣀⠀⠀⠀⠀⠀⠀⠀⠰⠒⠲⡄⠀⣏⣆⣀⡍
 ⠀⢠⡏⠀⡤⠒⠃⠀⡜⠀⠀⠀⠀⠀⢀⣴⠾⠛⡁⠀⠀⢀⣈⡉⠙⠳⣤⡀⠀⠀⠀⠘⣆⠀⣇⡼⢋⠀⠀⢱
@@ -104,70 +126,30 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡇⠹⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⡿⠁⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣤⣞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢢⣀⣠⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠲⢤⣀⣀⠀⢀⣀⣀⠤⠒⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-
-
-
-                
+            </div>
         </div>
     </div>
 
+    <div class="music-control">
+        <button onclick="toggleMusic()" id="musicBtn">🔇</button>
+    </div>
+
     <script>
-        const canvas = document.getElementById('snow-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height, snowflakes = [];
+        var video = document.getElementById("bg-video");
+        var btn = document.getElementById("musicBtn");
 
-        function init() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            snowflakes = [];
-            for (let i = 0; i < 150; i++) {
-                snowflakes.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    r: Math.random() * 3 + 1,
-                    d: Math.random() * 1
-                });
+        function toggleMusic() {
+            if (video.muted) {
+                video.muted = false;
+                btn.innerHTML = "🔊";
+                btn.style.background = "rgba(0, 255, 0, 0.2)";
+            } else {
+                video.muted = true;
+                btn.innerHTML = "🔇";
+                btn.style.background = "rgba(255, 255, 255, 0.1)";
             }
         }
-
-        function draw() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = 'white';
-            ctx.beginPath();
-            for (let i = 0; i < snowflakes.length; i++) {
-                let f = snowflakes[i];
-                ctx.moveTo(f.x, f.y);
-                ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
-            }
-            ctx.fill();
-            update();
-        }
-
-        function update() {
-            for (let i = 0; i < snowflakes.length; i++) {
-                let f = snowflakes[i];
-                f.y += Math.pow(f.d, 2) + 1;
-                f.x += Math.sin(f.y / 50);
-                if (f.y > height) {
-                    snowflakes[i] = { x: Math.random() * width, y: -10, r: f.r, d: f.d };
-                }
-            }
-        }
-
-        window.addEventListener('resize', init);
-        init();
-        setInterval(draw, 30);
     </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
