@@ -73,19 +73,7 @@
             box-shadow: 0 10px 20px rgba(0, 132, 255, 0.3);
             border: none;
         }
-        
-    <div style="position: fixed; bottom: 20px; left: 20px; z-index: 100;">
-        <div id="youtube-player" style="display: none;"></div>
-        <button onclick="toggleMusic()" id="musicBtn" ...> 🎵 </button>
-    </div>
 
-    <script>
-        // لێرە کۆدی بەفرەکە هەیە
-    </script>
-
-    <script>
-        /xY1DvxQzI4o/ لێرە کۆدی مۆسیقای یوتیوبەکە دابنێ
-    </script>        
         .music-control {
             position: fixed;
             bottom: 20px;
@@ -162,67 +150,9 @@
                 document.getElementById("musicBtn").innerHTML = "⏸️";
                 document.getElementById("musicBtn").style.background = "rgba(0, 255, 0, 0.2)";
                 isPlaying = true;
-        
-        <body onclick="startMusic()">
-
-    <div style="position: fixed; bottom: 20px; left: 20px; z-index: 100;">
-        <div id="youtube-player" style="display: none;"></div>
-        <button onclick="toggleMusic(event)" id="musicBtn" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 10px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
-            🎵
-        </button>
-    </div>
-
-    <script>
-        var player;
-        var isPlaying = false;
-
-        // کاتێک یوتیوب ئامادە دەبێت
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                height: '0',
-                width: '0',
-                videoId: 'xY1DvxQzI4o',
-                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'xY1DvxQzI4o' }
-            });
-        }
-
-        // ئەم فەنکشنە وادەکات بە یەکەم کلیک لە هەر شوێنێک مۆسیقاکە لێ بدات
-        function startMusic() {
-            if (!isPlaying && player) {
-                player.playVideo();
-                player.unMute(); // دڵنیابوونەوە لەوەی بێدەنگ نییە
-                updateButton(true);
-                isPlaying = true;
             }
         }
 
-        function toggleMusic(event) {
-            event.stopPropagation(); // بۆ ئەوەی کلیکەکە تێکەڵ بە startMusic نەبێت
-            if (isPlaying) {
-                player.pauseVideo();
-                updateButton(false);
-                isPlaying = false;
-            } else {
-                player.playVideo();
-                updateButton(true);
-                isPlaying = true;
-            }
-        }
-
-        function updateButton(playing) {
-            var btn = document.getElementById("musicBtn");
-            if (playing) {
-                btn.innerHTML = "⏸️";
-                btn.style.background = "rgba(0, 255, 0, 0.2)";
-            } else {
-                btn.innerHTML = "🎵";
-                btn.style.background = "rgba(255, 255, 255, 0.1)";
-            }
-        }
-    </script>
-        
-    
-        
         function toggleMusic(event) {
             event.stopPropagation();
             var btn = document.getElementById("musicBtn");
@@ -264,5 +194,3 @@
     </script>
 </body>
 </html>
-
-
