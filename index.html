@@ -50,7 +50,51 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             color: white;
         }
+        <div style="position: fixed; bottom: 20px; left: 20px; z-index: 100;">
+    <div id="player" style="display:none;"></div>
+    
+    <button onclick="toggleMusic()" id="musicBtn" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 10px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); width: 50px; height: 50px; font-size: 20px;">
+        🎵
+    </button>
+</div>
 
+<script>
+    // بارکردنی API یوتیوب
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '0',
+            width: '0',
+            videoId: 'Fj6cr3FO2JI', // ئایدی ڤیدیۆکەی تۆ
+            playerVars: {
+                'autoplay': 0,
+                'loop': 1,
+                'playlist': 'Fj6cr3FO2JI'
+            }
+        });
+    }
+
+    var isPlaying = false;
+    function toggleMusic() {
+        var btn = document.getElementById("musicBtn");
+        if (!isPlaying) {
+            player.playVideo();
+            btn.style.background = "rgba(0, 255, 0, 0.2)";
+            btn.innerHTML = "⏸️"; // گۆڕینی ئایکۆن بۆ ڕاوەستان
+            isPlaying = true;
+        } else {
+            player.pauseVideo();
+            btn.style.background = "rgba(255, 255, 255, 0.1)";
+            btn.innerHTML = "🎵"; // گۆڕینی ئایکۆن بۆ مۆسیقا
+            isPlaying = false;
+        }
+    }
+</script>
         .app-icon { 
             width: 90px; height: 90px; 
             margin-bottom: 20px; 
@@ -170,3 +214,4 @@
     </script>
 </body>
 </html>
+
